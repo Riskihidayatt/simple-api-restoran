@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "8cb775a6-9b08-4785-a800-7ae397c8e04b",
+		"name": "Simple Restaurant Enigma",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34298184"
+	},
+	"item": [
+		{
+			"name": "MENU",
+			"item": [
+				{
+					"name": "POST MENU",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mie Goreng Spesial\",\r\n  \"description\": \"Mie goreng dengan telur, ayam, dan sayuran\",\r\n  \"price\": 35000.0,\r\n  \"category\": \"FOOD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/menus/37d67030-683f-420f-938d-f49e7f1a4972",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"menus",
+								"37d67030-683f-420f-938d-f49e7f1a4972"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  MENU BY ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mie Goreng Spesial\",\r\n  \"description\": \"Mie goreng dengan telur, ayam, dan sayuran\",\r\n  \"price\": 35000.0,\r\n  \"category\": \"FOOD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/menus/37d67030-683f-420f-938d-f49e7f1a4972",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"menus",
+								"37d67030-683f-420f-938d-f49e7f1a4972"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  ALLMENU",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mie Goreng Spesial\",\r\n  \"description\": \"Mie goreng dengan telur, ayam, dan sayuran\",\r\n  \"price\": 35000.0,\r\n  \"category\": \"FOOD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/menus/37d67030-683f-420f-938d-f49e7f1a4972",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"menus",
+								"37d67030-683f-420f-938d-f49e7f1a4972"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE MENU",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"Mie goreng dengan telur, ayam, dan sayuran\",\r\n  \"price\": 35000.0,\r\n  \"category\": \"FOOD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/menu/delete/09cdabb7-a98c-471b-ad4d-3486d3c74469",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"menu",
+								"delete",
+								"09cdabb7-a98c-471b-ad4d-3486d3c74469"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT MENU",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mie Goreng Spesial update\",\r\n  \"description\": \"Mie goreng dengan telur, ayam, dan sayuran update\",\r\n  \"price\": 38000.0,\r\n  \"category\": \"FOOD\",\r\n  \"isAvailable\" :\"false\" \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/menu/update/37d67030-683f-420f-938d-f49e7f1a4972",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"menu",
+								"update",
+								"37d67030-683f-420f-938d-f49e7f1a4972"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "POST Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Budi Santoso\",\r\n  \"email\": \"budi.santoso@email.com\",\r\n  \"phone\": \"08123456789\",\r\n  \"address\": \"Jl. Merdeka No. 123, Jakarta\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT CUSTOMER",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Budi     \",\r\n  \"email\": \"budi.sanSDtoso@email.com\",\r\n  \"phone\": \"081234563789\",\r\n  \"address\": \"Jl. Merdeka No. 123, Jakarta\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customer/update/173eab60-53f1-4dbd-ba30-a1c230dd471d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer",
+								"update",
+								"173eab60-53f1-4dbd-ba30-a1c230dd471d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE CUSTOMER",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Budi     \",\r\n  \"email\": \"budi.sanSDtoso@email.com\",\r\n  \"phone\": \"081234563789\",\r\n  \"address\": \"Jl. Merdeka No. 123, Jakarta\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customer/delete/173eab60-53f1-4dbd-ba30-a1c230dd47",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer",
+								"delete",
+								"173eab60-53f1-4dbd-ba30-a1c230dd47"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  CUTOMER BY ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mie Goreng Spesial\",\r\n  \"description\": \"Mie goreng dengan telur, ayam, dan sayuran\",\r\n  \"price\": 35000.0,\r\n  \"category\": \"FOOD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/customer/search/2455ffea-56fb-4ef0-ae90-2f56b5711924",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"customer",
+								"search",
+								"2455ffea-56fb-4ef0-ae90-2f56b5711924"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  CUTOMER ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mie Goreng Spesial\",\r\n  \"description\": \"Mie goreng dengan telur, ayam, dan sayuran\",\r\n  \"price\": 35000.0,\r\n  \"category\": \"FOOD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/menus/37d67030-683f-420f-938d-f49e7f1a4972",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"menus",
+								"37d67030-683f-420f-938d-f49e7f1a4972"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "POST Transactions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerId\": \"b1488d9c-8772-422d-a2c9-29b885776fe2\",\r\n  \"items\": [\r\n    {\r\n      \"menuId\": \"f169ba64-894f-4676-9055-151206b83473\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"menuId\": \"98422b0e-5370-4404-a643-7ce70b36bcaa\",\r\n      \"quantity\": 1\r\n    }\r\n  ],\r\n  \"notes\": \"Nasi goreng tidak pedas.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/transactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET  Transactions BY ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mie Goreng Spesial\",\r\n  \"description\": \"Mie goreng dengan telur, ayam, dan sayuran\",\r\n  \"price\": 35000.0,\r\n  \"category\": \"FOOD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/transactions/search/e339d290-cd81-441f-b7de-96ec6c24f6ec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"transactions",
+								"search",
+								"e339d290-cd81-441f-b7de-96ec6c24f6ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET   ALLTransactions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mie Goreng Spesial\",\r\n  \"description\": \"Mie goreng dengan telur, ayam, dan sayuran\",\r\n  \"price\": 35000.0,\r\n  \"category\": \"FOOD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/transactions?customerId=b1488d9c-8772-422d-a2c9-29b885776fe2&startDate=2025-04-27T00:00:00&endDate=2025-04-27T23:59:59&page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "b1488d9c-8772-422d-a2c9-29b885776fe2"
+								},
+								{
+									"key": "startDate",
+									"value": "2025-04-27T00:00:00"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-04-27T23:59:59"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
