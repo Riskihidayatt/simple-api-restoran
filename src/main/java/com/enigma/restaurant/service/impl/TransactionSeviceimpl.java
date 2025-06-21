@@ -21,7 +21,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +40,7 @@ public class TransactionSeviceimpl implements TransactionService {
         this.menuRepository = menuRepository;
         this.customerService = customerService;
     }
+
     @Override
     public TransactionResponse createTransaction(CreateTransactionRequest request) {
         Customer customer = customerService.findByIdOrThrow(request.getCustomerId());
@@ -75,6 +75,7 @@ public class TransactionSeviceimpl implements TransactionService {
         return mapEntityToResponse(savedTransaction);
 
     }
+
     @Override
     public TransactionResponse getTransactionById(String id) {
         Transaction transaction = transactionRepository.findById(id)
@@ -92,7 +93,6 @@ public class TransactionSeviceimpl implements TransactionService {
         Page<Transaction> transactionPage = transactionRepository.findAll(spec, pageable);
         return transactionPage.map(this::mapEntityToSimpleResponse);
     }
-
     private TransactionResponse mapEntityToResponse(Transaction transaction) {
         // Map Customer -> SimpleCustomerResponse
         SimpleCustomerResponse customerDto = SimpleCustomerResponse.builder()
@@ -100,7 +100,6 @@ public class TransactionSeviceimpl implements TransactionService {
                 .name(transaction.getCustomer().getName())
                 .phone(transaction.getCustomer().getPhone())
                 .build();
-
         // Map Set<TransactionDetail> -> List<TransactionDetailResponse>
         List<TransactionDetailResponse> detailDtos = transaction.getTransactionDetails().stream()
                 .map(detail -> TransactionDetailResponse.builder()
@@ -113,8 +112,6 @@ public class TransactionSeviceimpl implements TransactionService {
                         .subtotal(detail.getSubtotal())
                         .build())
                 .collect(Collectors.toList());
-
-
         return TransactionResponse.builder()
                 .id(transaction.getId())
                 .customer(customerDto)
