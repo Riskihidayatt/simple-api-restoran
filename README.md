@@ -31,11 +31,11 @@ Proyek ini menggunakan variabel *environment* untuk mengamankan kredensial datab
    ```
 2. Buka file `.env` dan atur kata sandi PostgreSQL Anda:
    ```env
-   DB_URL=jdbc:postgresql://localhost:5432/restoenigma_db
+   DB_URL=jdbc:postgresql://localhost:5432/name_db
    DB_USERNAME=postgres
    DB_PASSWORD=password_postgres_anda
    ```
-3. **Pastikan** Anda sudah membuat database kosong bernama `restoenigma_db` di PostgreSQL Anda sebelum menjalankan aplikasi. Tabel akan dibuat secara otomatis oleh Hibernate (Spring Data JPA).
+3. **Pastikan** Anda sudah membuat database kosong bernama `name_db` di PostgreSQL Anda sebelum menjalankan aplikasi. Tabel akan dibuat secara otomatis oleh Hibernate (Spring Data JPA).
 
 ### 3. Menjalankan Aplikasi
 Anda dapat menjalankan aplikasi menggunakan Maven Wrapper bawaan proyek. 
