@@ -1,6 +1,7 @@
 package com.project.restaurant.dto.response;
 
 import com.project.restaurant.enums.MenuCategory;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,10 +13,20 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Response ringkas data menu")
 public class SimpleMenuResponse {
+    @Schema(description = "ID unik menu", example = "menu-001-xyz")
     private String id;
+
+    @Schema(description = "Nama menu", example = "Nasi Goreng Spesial")
     private String name;
+
+    @Schema(description = "Harga dalam Rupiah", example = "25000")
     private Double price;
+
+    @Schema(description = "Kategori menu", example = "FOOD")
     private MenuCategory category;
+
+    @Schema(description = "Status ketersediaan", example = "true")
     private Boolean isAvailable;
 }

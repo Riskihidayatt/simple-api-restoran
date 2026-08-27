@@ -30,16 +30,16 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerResponse addCustomer(CreateCustomerRequest customerRequest) {
         if (customerRequest.getEmail() != null && customerRepository.findByEmail(customerRequest.getEmail()).isPresent()) {
-            throw new DuplicateResourceException("Email " + customerRequest.getEmail() + " sudah terdaftar");
+            throw new DuplicateResourceException("Email " + customerRequest.getEmail() + " is already registered");
         }
         if (customerRepository.findByPhone(customerRequest.getPhone()).isPresent()) {
-            throw new DuplicateResourceException("Nomor telepon " + customerRequest.getPhone() + " sudah terdaftar");
+            throw new DuplicateResourceException("Phone number " + customerRequest.getPhone() + " is already registered");
         }
         Customer customer = customerMapper.toEntity(customerRequest);
         try {
             customerRepository.save(customer);
         } catch (DataIntegrityViolationException e) {
-            throw new DuplicateResourceException("Email atau nomor telepon sudah terdaftar", e);
+            throw new DuplicateResourceException("Email or phone number is already registered", e);
         }
         return customerMapper.toResponse(customer);
     }
@@ -60,14 +60,14 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = findByIdOrThrow(id);
         if (request.getPhone() != null && !request.getPhone().equals(customer.getPhone())) {
             if (customerRepository.findByPhone(request.getPhone()).isPresent()) {
-                throw new DuplicateResourceException("Nomor telepon " + request.getPhone() + " sudah terdaftar");
+                throw new DuplicateResourceException("Phone number " + request.getPhone() + " is already registered");
             }
         }
         customerMapper.updateEntityFromRequest(request, customer);
         try {
             customerRepository.saveAndFlush(customer);
         } catch (DataIntegrityViolationException e) {
-            throw new DuplicateResourceException("Gagal update: Email atau nomor telepon mungkin sudah ada.", e);
+            throw new DuplicateResourceException("Update failed: Email or phone number may already exist.", e);
         }
         return customerMapper.toResponse(customer);
     }
@@ -85,6 +85,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     public Customer findByIdOrThrow(String id) {
         return customerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer dengan ID " + id + " tidak ditemukan"));
+                .orElseThrow(() -> new ResourceNotFoundException("Customer with ID " + id + " not found"));
     }
 }

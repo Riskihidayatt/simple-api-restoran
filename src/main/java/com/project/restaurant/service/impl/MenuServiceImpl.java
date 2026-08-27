@@ -65,6 +65,6 @@ public class MenuServiceImpl implements MenuService {
 
     private Menu findByIdOrThrow(String id) {
         return menuRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Menu dengan ID " + id + " tidak ditemukan"));
+                .orElseThrow(() -> new ResourceNotFoundException("Menu with ID " + id + " not found"));
     }
 }

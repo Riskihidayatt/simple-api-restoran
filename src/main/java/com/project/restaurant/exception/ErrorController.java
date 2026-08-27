@@ -36,13 +36,13 @@ public class ErrorController {
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errors.put(error.getField(), error.getDefaultMessage())
         );
-        return CommonResponse.error("Validasi gagal", HttpStatus.BAD_REQUEST, errors);
+        return CommonResponse.error("Validation failed", HttpStatus.BAD_REQUEST, errors);
     }
 
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<CommonResponse<String>> handleAllUncaughtException(Exception exception) {
-        log.error("Terjadi kesalahan internal pada server", exception);
-        return CommonResponse.error("Terjadi kesalahan internal pada server", HttpStatus.INTERNAL_SERVER_ERROR);
+        log.error("An internal server error occurred", exception);
+        return CommonResponse.error(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

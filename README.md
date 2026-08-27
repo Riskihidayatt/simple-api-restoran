@@ -1,10 +1,24 @@
-# Simple Restaurant API
+﻿# Simple Restaurant API
 
 A simple RESTful API for managing restaurant menus, customers, and transactions. Built using Java 21, Spring Boot 3.4.5, and PostgreSQL.
 
 ---
 
-## ?? System Requirements
+## 🛠 Tech Stack
+
+| Technology | Version | Description |
+| :--- | :--- | :--- |
+| **Java** | 21 | Programming language |
+| **Spring Boot** | 3.4.5 | Backend framework |
+| **Spring Data JPA** | - | ORM & database access |
+| **PostgreSQL** | - | Relational database |
+| **MapStruct** | 1.6.3 | DTO ↔ Entity mapping |
+| **Lombok** | - | Boilerplate code reduction |
+| **SpringDoc OpenAPI** | 2.8.5 | Swagger UI & API documentation |
+
+---
+
+## 📋 System Requirements
 
 Before running this project, make sure your system has the following installed:
 - **Java Development Kit (JDK) 21**
@@ -14,7 +28,7 @@ Before running this project, make sure your system has the following installed:
 
 ---
 
-## ??? How to Clone and Run the Project
+## ⚙️ How to Clone and Run the Project
 
 ### 1. Clone the Repository
 Run the following command in your terminal to clone the repository:
@@ -58,20 +72,39 @@ Get-Content .env | Foreach-Object {
 
 ---
 
-## ?? API Endpoints Structure
+## 📖 API Documentation (Swagger UI)
+
+This project integrates **SpringDoc OpenAPI** for interactive API documentation.
+
+Once the application is running, access the documentation at:
+
+| Resource | URL |
+| :--- | :--- |
+| **Swagger UI** | [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html) |
+| **OpenAPI JSON** | [http://localhost:8081/v3/api-docs](http://localhost:8081/v3/api-docs) |
+
+**Features:**
+- Interactive "Try it out" for all endpoints
+- Grouped by domain: **Customer**, **Menu**, **Transaction**
+- Request/response examples with field descriptions
+- Pagination parameter documentation
+
+---
+
+## 🔗 API Endpoints Structure
 
 Base URL: `http://localhost:8081/api`
 
-### ?? Menu (`/api/menus`)
+### 🍽 Menu (`/api/menus`)
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `POST` | `/api/menus` | Add a new menu item |
 | `GET` | `/api/menus` | Retrieve all menu items (Supports Pagination & Filtering) |
-| `GET` | `/api/menus/{id}` | Retrieve menu item details by ID |
+| `GET` | `/api/menus/search/{id}` | Retrieve menu item details by ID |
 | `PUT` | `/api/menus/update/{id}` | Update a menu item |
 | `DELETE` | `/api/menus/delete/{id}` | Delete a menu item |
 
-### ?? Customer (`/api/customers`)
+### 👤 Customer (`/api/customers`)
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `POST` | `/api/customers` | Add a new customer |
@@ -80,7 +113,7 @@ Base URL: `http://localhost:8081/api`
 | `PUT` | `/api/customers/update/{id}`| Update customer data |
 | `DELETE` | `/api/customers/delete/{id}`| Delete a customer |
 
-### ?? Transaction (`/api/transactions`)
+### 💰 Transaction (`/api/transactions`)
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `POST` | `/api/transactions` | Create a new purchase transaction |
@@ -89,7 +122,29 @@ Base URL: `http://localhost:8081/api`
 
 ---
 
-## ?? Pagination and Sorting Notes
+## 📄 Pagination and Sorting Notes
 For endpoints that return a list (GET All), you can send standard *Spring Pageable* query params, for example:
 - `?page=0&size=5` (Get the first page with a maximum of 5 items per page)
 - `?sort=name,desc` (Sort by name in *descending* order)
+
+---
+
+## 🏗 Project Structure
+
+```
+src/main/java/com/project/restaurant/
+├── config/                  # Configuration (OpenAPI/Swagger)
+├── constant/                # API endpoint constants
+├── controller/              # REST controllers
+├── dto/
+│   ├── request/             # Request DTOs with validation
+│   └── response/            # Response DTOs
+├── entity/                  # JPA entities
+├── enums/                   # Enumerations (MenuCategory)
+├── exception/               # Custom exceptions & global error handler
+├── mapper/                  # MapStruct mappers
+├── repository/              # Spring Data JPA repositories
+├── service/                 # Service interfaces
+│   └── impl/                # Service implementations
+└── specification/           # JPA Specifications for dynamic filtering
+```

@@ -62,10 +62,10 @@ public class TransactionServiceImpl implements TransactionService {
         for (TransactionItemRequest item : request.getItems()) {
             Menu menu = menuMap.get(item.getMenuId());
             if (menu == null) {
-                throw new ResourceNotFoundException("Menu dengan ID " + item.getMenuId() + " tidak ditemukan");
+                throw new ResourceNotFoundException("Menu with ID " + item.getMenuId() + " not found");
             }
             if (Boolean.FALSE.equals(menu.getIsAvailable())) {
-                throw new BadRequestException("Menu '" + menu.getName()+ "' sedang tidak tersedia.");
+                throw new BadRequestException("Menu '" + menu.getName()+ "' is currently unavailable.");
             }
 
             double subtotal = menu.getPrice() * item.getQuantity();
@@ -89,7 +89,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public TransactionResponse getTransactionById(String id) {
         Transaction transaction = transactionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Transaksi dengan ID " + id + " tidak ditemukan"));
+                .orElseThrow(() -> new ResourceNotFoundException("Transaction with ID " + id + " not found"));
         return transactionMapper.toResponse(transaction);
     }
     

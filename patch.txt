@@ -1,0 +1,9 @@
+﻿*** Begin Patch
+*** Update File: src\main\java\com\project\restaurant\dto\request\CreateTransactionRequest.java
+@@ -20,3 +20,3 @@
+ public class CreateTransactionRequest {
+     @NotBlank(message = "Customer ID must not be empty")
+-    @Schema(description = "ID of the customer making the transaction", example = "abc-123-def")
++    @Schema(description = "ID of the customer making the transaction", example = "550e8400-e29b-41d4-a716-446655440000")
+     private String customerId;
+*** End Patch

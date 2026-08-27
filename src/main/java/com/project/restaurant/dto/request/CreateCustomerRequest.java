@@ -1,7 +1,6 @@
 package com.project.restaurant.dto.request;
 
-
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -16,18 +15,23 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Request body to create a new customer")
 public class CreateCustomerRequest {
-    @NotBlank(message = "Nama customer tidak boleh kosong")
-    @Size(max = 100, message = "Nama maksimal 100 karakter")
+    @NotBlank(message = "Customer name must not be empty")
+    @Size(max = 100, message = "Name must not exceed 100 characters")
+    @Schema(description = "Customer's full name", example = "Budi Santoso")
     private String name;
 
-    @Email(message = "Format email tidak valid")
-    @Size(max = 100, message = "Email maksimal 100 karakter")
-    private String email; // Bisa null jika tidak wajib
+    @Email(message = "Invalid email format")
+    @Size(max = 100, message = "Email must not exceed 100 characters")
+    @Schema(description = "Customer's email address (optional)", example = "budi@email.com")
+    private String email;
 
-    @NotBlank(message = "Nomor telepon tidak boleh kosong")
-    @Size(min = 10, max = 20, message = "Nomor telepon harus antara 10 dan 20 digit")
+    @NotBlank(message = "Phone number must not be empty")
+    @Size(min = 10, max = 20, message = "Phone number must be between 10 and 20 digits")
+    @Schema(description = "Customer's phone number", example = "081234567890")
     private String phone;
 
+    @Schema(description = "Customer's address (optional)", example = "Jl. Merdeka No. 10, Jakarta")
     private String address;
 }
