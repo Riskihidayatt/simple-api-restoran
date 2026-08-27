@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public class MenuController {
             @Parameter(description = "Filter by category: FOOD, BEVERAGE, DESSERT") @RequestParam(required = false) MenuCategory category,
             @Parameter(description = "Filter by menu name") @RequestParam(required = false) String name,
             @Parameter(description = "Filter by maximum price") @RequestParam(required = false) Double maxPrice,
-            @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable
+            @ParameterObject @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable
     ) {
         Page<MenuResponse> menuPage = menuService.getAllMenus(category, name, maxPrice, pageable);
         return CommonResponse.ok("Menu list successfully retrieved", menuPage.getContent(), new PaginationResponse(menuPage));

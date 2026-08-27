@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class CustomerController {
     @GetMapping
     public ResponseEntity<CommonResponse<List<SimpleCustomerResponse>>> getAllCustomers(
             @Parameter(description = "Filter by customer name") @RequestParam(required = false) String name,
-            @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable
+            @ParameterObject @PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC) Pageable pageable
     ) {
         Page<SimpleCustomerResponse> customerPage = customerService.getAllCustomers(name, pageable);
         return CommonResponse.ok("Customer list successfully retrieved", customerPage.getContent(), new PaginationResponse(customerPage));
