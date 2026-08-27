@@ -1,160 +1,96 @@
 # Simple Restaurant API
 
-API sederhana untuk mengelola menu, pelanggan, dan transaksi restoran.
+RESTful API sederhana untuk mengelola menu, pelanggan, dan transaksi restoran. Dibangun menggunakan Java 21, Spring Boot 3.4.5, dan PostgreSQL.
 
-## Menjalankan API (Contoh)
+---
 
-_Bagian ini memerlukan informasi spesifik tentang bagaimana API ini dijalankan. Silakan ganti dengan instruksi yang relevan._
+## ?? Persyaratan Sistem
 
+Sebelum menjalankan proyek ini, pastikan sistem Anda telah terinstal:
+- **Java Development Kit (JDK) 21**
+- **Maven** (Opsional, karena proyek ini sudah menyertakan Maven Wrapper `mvnw`)
+- **PostgreSQL** (Port default 5432)
+- **Git**
+
+---
+
+## ??? Cara Clone dan Menjalankan Proyek
+
+### 1. Clone Repositori
+Jalankan perintah berikut di terminal Anda untuk mengkloning repositori:
 ```bash
-# Contoh (ganti dengan perintah sebenarnya):
-# ./gradlew bootRun
-# atau
-# npm start
+git clone <URL_REPOSITORI_ANDA>
+cd simple-api-restoran
 ```
 
-## Endpoints API
+### 2. Konfigurasi Database (Environment Variables)
+Proyek ini menggunakan variabel *environment* untuk mengamankan kredensial database.
+1. Gandakan file `.env.example` dan ubah namanya menjadi `.env`.
+   ```bash
+   cp .env.example .env
+   ```
+2. Buka file `.env` dan atur kata sandi PostgreSQL Anda:
+   ```env
+   DB_URL=jdbc:postgresql://localhost:5432/restoenigma_db
+   DB_USERNAME=postgres
+   DB_PASSWORD=password_postgres_anda
+   ```
+3. **Pastikan** Anda sudah membuat database kosong bernama `restoenigma_db` di PostgreSQL Anda sebelum menjalankan aplikasi. Tabel akan dibuat secara otomatis oleh Hibernate (Spring Data JPA).
 
-Basis URL: `http://localhost:8080`
+### 3. Menjalankan Aplikasi
+Anda dapat menjalankan aplikasi menggunakan Maven Wrapper bawaan proyek. 
 
-### Menu
+**Pengguna Windows (PowerShell):**
+Jika Anda tidak menggunakan plugin `.env` runner di IDE, muat environment variables ke session PowerShell Anda terlebih dahulu:
+```powershell
+Get-Content .env | Foreach-Object {
+    $var = $_.Split('=')
+    Set-Item "Env:\$($var[0])" $var[1]
+}
+.\mvnw spring-boot:run
+```
 
-Endpoints untuk mengelola menu restoran.
+**Atau Jika Menggunakan IntelliJ IDEA:**
+1. Instal plugin **EnvFile**.
+2. Klik opsi `Edit Configurations...` pada konfigurasi jalannya (Run) aplikasi.
+3. Buka tab **EnvFile**, centang `Enable EnvFile`, lalu tambahkan file `.env` yang baru dibuat.
+4. Klik tombol *Run* / *Debug*.
 
-*   **POST Menu**
-    *   Metode: `POST`
-    *   Path: `/menus` atau `/menus/{id}` (Catatan: Path `/menus/{id}` untuk POST tidak umum, biasanya `/menus`)
-    *   Deskripsi: Menambahkan menu baru.
-    *   Contoh Body:
-        ```json
-        {
-          "name": "Mie Goreng Spesial",
-          "description": "Mie goreng dengan telur, ayam, dan sayuran",
-          "price": 35000.0,
-          "category": "FOOD"
-        }
-        ```
+---
 
-*   **GET Menu by ID**
-    *   Metode: `GET`
-    *   Path: `/menus/{menuId}`
-    *   Deskripsi: Mendapatkan detail menu berdasarkan ID.
+## ?? Struktur Endpoints API
 
-*   **GET All Menus**
-    *   Metode: `GET`
-    *   Path: `/menus`
-    *   Deskripsi: Mendapatkan daftar semua menu. (Catatan: Koleksi Postman menunjukkan path `/menus/{id}` untuk ini, yang mungkin tidak benar).
+Basis URL: `http://localhost:8081/api`
 
-*   **PUT Menu**
-    *   Metode: `PUT`
-    *   Path: `/menu/update/{menuId}`
-    *   Deskripsi: Memperbarui menu yang sudah ada.
-    *   Contoh Body:
-        ```json
-        {
-          "name": "Mie Goreng Spesial update",
-          "description": "Mie goreng dengan telur, ayam, dan sayuran update",
-          "price": 38000.0,
-          "category": "FOOD",
-          "isAvailable": false
-        }
-        ```
+### ?? Menu (`/api/menus`)
+| Metode | Endpoint | Keterangan |
+| :--- | :--- | :--- |
+| `POST` | `/api/menus` | Menambahkan menu baru |
+| `GET` | `/api/menus` | Mengambil daftar semua menu (Mendukung Paginasi & Filter) |
+| `GET` | `/api/menus/{id}` | Mengambil detail menu berdasarkan ID |
+| `PUT` | `/api/menus/update/{id}` | Memperbarui menu |
+| `DELETE` | `/api/menus/delete/{id}` | Menghapus menu |
 
-*   **DELETE Menu**
-    *   Metode: `DELETE`
-    *   Path: `/menu/delete/{menuId}`
-    *   Deskripsi: Menghapus menu berdasarkan ID.
+### ?? Customer (`/api/customers`)
+| Metode | Endpoint | Keterangan |
+| :--- | :--- | :--- |
+| `POST` | `/api/customers` | Menambahkan customer baru |
+| `GET` | `/api/customers` | Mengambil daftar semua customer (Mendukung Paginasi & Filter) |
+| `GET` | `/api/customers/search/{id}`| Mengambil detail customer berdasarkan ID |
+| `PUT` | `/api/customers/update/{id}`| Memperbarui data customer |
+| `DELETE` | `/api/customers/delete/{id}`| Menghapus customer |
 
-### Customer
+### ?? Transaction (`/api/transactions`)
+| Metode | Endpoint | Keterangan |
+| :--- | :--- | :--- |
+| `POST` | `/api/transactions` | Membuat transaksi pembelian baru |
+| `GET` | `/api/transactions` | Mengambil daftar transaksi (Mendukung Paginasi & Filter Tanggal/Customer) |
+| `GET` | `/api/transactions/search/{id}`| Mengambil detail transaksi berdasarkan ID |
 
-Endpoints untuk mengelola data pelanggan.
+---
 
-*   **POST Customer**
-    *   Metode: `POST`
-    *   Path: `/customer`
-    *   Deskripsi: Menambahkan pelanggan baru.
-    *   Contoh Body:
-        ```json
-        {
-          "name": "Budi Santoso",
-          "email": "budi.santoso@email.com",
-          "phone": "08123456789",
-          "address": "Jl. Merdeka No. 123, Jakarta"
-        }
-        ```
+## ?? Catatan Paginasi dan Sorting
+Untuk endpoint yang mengembalikan daftar (GET All), Anda bisa mengirimkan query params standar *Spring Pageable*, contohnya:
+- `?page=0&size=5` (Mendapatkan halaman pertama dengan maksimal 5 data per halaman)
+- `?sort=name,desc` (Mengurutkan berdasarkan nama secara *descending*)
 
-*   **GET Customer by ID**
-    *   Metode: `GET`
-    *   Path: `/api/customer/search/{customerId}`
-    *   Deskripsi: Mendapatkan detail pelanggan berdasarkan ID.
-
-*   **GET All Customers**
-    *   Metode: `GET`
-    *   Path: `/customer` atau `/api/customer` (Catatan: Koleksi Postman menunjukkan path `/menus/{id}` untuk ini, yang jelas salah. Path yang lebih umum adalah `/customer` atau `/api/customer`).
-    *   Deskripsi: Mendapatkan daftar semua pelanggan.
-
-*   **PUT Customer**
-    *   Metode: `PUT`
-    *   Path: `/customer/update/{customerId}`
-    *   Deskripsi: Memperbarui data pelanggan yang sudah ada.
-    *   Contoh Body:
-        ```json
-        {
-          "name": "Budi Santoso Updated",
-          "email": "budi.santoso.updated@email.com",
-          "phone": "08123456780",
-          "address": "Jl. Merdeka No. 12A, Jakarta"
-        }
-        ```
-
-*   **DELETE Customer**
-    *   Metode: `DELETE`
-    *   Path: `/customer/delete/{customerId}`
-    *   Deskripsi: Menghapus pelanggan berdasarkan ID.
-
-### Transactions
-
-Endpoints untuk mengelola transaksi.
-
-*   **POST Transaction**
-    *   Metode: `POST`
-    *   Path: `/api/transactions`
-    *   Deskripsi: Membuat transaksi baru.
-    *   Contoh Body:
-        ```json
-        {
-          "customerId": "b1488d9c-8772-422d-a2c9-29b885776fe2",
-          "items": [
-            {
-              "menuId": "f169ba64-894f-4676-9055-151206b83473",
-              "quantity": 2
-            },
-            {
-              "menuId": "98422b0e-5370-4404-a643-7ce70b36bcaa",
-              "quantity": 1
-            }
-          ],
-          "notes": "Nasi goreng tidak pedas."
-        }
-        ```
-
-*   **GET Transaction by ID**
-    *   Metode: `GET`
-    *   Path: `/api/transactions/search/{transactionId}`
-    *   Deskripsi: Mendapatkan detail transaksi berdasarkan ID.
-
-*   **GET All Transactions**
-    *   Metode: `GET`
-    *   Path: `/api/transactions`
-    *   Deskripsi: Mendapatkan daftar semua transaksi, dapat difilter berdasarkan parameter.
-    *   Parameter Query:
-        *   `customerId` (string): ID pelanggan
-        *   `startDate` (string, format: `YYYY-MM-DDTHH:MM:SS`): Tanggal mulai filter
-        *   `endDate` (string, format: `YYYY-MM-DDTHH:MM:SS`): Tanggal akhir filter
-        *   `page` (integer): Nomor halaman (default 0)
-        *   `size` (integer): Jumlah item per halaman (default 10)
-
-## Catatan Tambahan
-
-*   Beberapa path endpoint dalam koleksi Postman yang asli (misalnya untuk "GET All Menus" dan "GET All Customers") tampak tidak konsisten atau mungkin salah. README ini mencoba menyajikan path yang lebih standar dan umum digunakan untuk operasi RESTful. Selalu verifikasi dengan implementasi backend yang sebenarnya.
-*   ID yang digunakan dalam contoh path (seperti `37d67030-683f-420f-938d-f49e7f1a4972`) adalah contoh UUID dan harus diganti dengan ID yang relevan saat menggunakan API.

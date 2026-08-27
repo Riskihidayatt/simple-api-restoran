@@ -31,3 +31,22 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Claude Code Analysis Context ###
+code-analysis-context.md
+
+### Claude ###
+.claude/
+
+# Env files
+.env
+.env.local
+
+### AI / Agent Context Files ###
+.agents
+.codex
+.claude
+.claude/
+code-analysis-context.md
+*.patch
+
