@@ -1,47 +1,47 @@
 # Simple Restaurant API
 
-RESTful API sederhana untuk mengelola menu, pelanggan, dan transaksi restoran. Dibangun menggunakan Java 21, Spring Boot 3.4.5, dan PostgreSQL.
+A simple RESTful API for managing restaurant menus, customers, and transactions. Built using Java 21, Spring Boot 3.4.5, and PostgreSQL.
 
 ---
 
-## ?? Persyaratan Sistem
+## ?? System Requirements
 
-Sebelum menjalankan proyek ini, pastikan sistem Anda telah terinstal:
+Before running this project, make sure your system has the following installed:
 - **Java Development Kit (JDK) 21**
-- **Maven** (Opsional, karena proyek ini sudah menyertakan Maven Wrapper `mvnw`)
-- **PostgreSQL** (Port default 5432)
+- **Maven** (Optional, as this project already includes Maven Wrapper `mvnw`)
+- **PostgreSQL** (Default port 5432)
 - **Git**
 
 ---
 
-## ??? Cara Clone dan Menjalankan Proyek
+## ??? How to Clone and Run the Project
 
-### 1. Clone Repositori
-Jalankan perintah berikut di terminal Anda untuk mengkloning repositori:
+### 1. Clone the Repository
+Run the following command in your terminal to clone the repository:
 ```bash
-git clone <URL_REPOSITORI_ANDA>
+git clone <YOUR_REPOSITORY_URL>
 cd simple-api-restoran
 ```
 
-### 2. Konfigurasi Database (Environment Variables)
-Proyek ini menggunakan variabel *environment* untuk mengamankan kredensial database.
-1. Gandakan file `.env.example` dan ubah namanya menjadi `.env`.
+### 2. Database Configuration (Environment Variables)
+This project uses environment variables to secure database credentials.
+1. Duplicate the `.env.example` file and rename it to `.env`.
    ```bash
    cp .env.example .env
    ```
-2. Buka file `.env` dan atur kata sandi PostgreSQL Anda:
+2. Open the `.env` file and set your PostgreSQL password:
    ```env
-   DB_URL=jdbc:postgresql://localhost:5432/restoenigma_db
+   DB_URL=jdbc:postgresql://localhost:5432/name_db
    DB_USERNAME=postgres
-   DB_PASSWORD=password_postgres_anda
+   DB_PASSWORD=your_postgres_password
    ```
-3. **Pastikan** Anda sudah membuat database kosong bernama `restoenigma_db` di PostgreSQL Anda sebelum menjalankan aplikasi. Tabel akan dibuat secara otomatis oleh Hibernate (Spring Data JPA).
+3. **Make sure** you have already created an empty database named `name_db` in your PostgreSQL before running the application. Tables will be created automatically by Hibernate (Spring Data JPA).
 
-### 3. Menjalankan Aplikasi
-Anda dapat menjalankan aplikasi menggunakan Maven Wrapper bawaan proyek. 
+### 3. Running the Application
+You can run the application using the project's built-in Maven Wrapper.
 
-**Pengguna Windows (PowerShell):**
-Jika Anda tidak menggunakan plugin `.env` runner di IDE, muat environment variables ke session PowerShell Anda terlebih dahulu:
+**Windows Users (PowerShell):**
+If you are not using an `.env` runner plugin in your IDE, load the environment variables into your PowerShell session first:
 ```powershell
 Get-Content .env | Foreach-Object {
     $var = $_.Split('=')
@@ -50,47 +50,46 @@ Get-Content .env | Foreach-Object {
 .\mvnw spring-boot:run
 ```
 
-**Atau Jika Menggunakan IntelliJ IDEA:**
-1. Instal plugin **EnvFile**.
-2. Klik opsi `Edit Configurations...` pada konfigurasi jalannya (Run) aplikasi.
-3. Buka tab **EnvFile**, centang `Enable EnvFile`, lalu tambahkan file `.env` yang baru dibuat.
-4. Klik tombol *Run* / *Debug*.
+**Or If Using IntelliJ IDEA:**
+1. Install the **EnvFile** plugin.
+2. Click on `Edit Configurations...` in the application's Run configuration.
+3. Open the **EnvFile** tab, check `Enable EnvFile`, then add the newly created `.env` file.
+4. Click the *Run* / *Debug* button.
 
 ---
 
-## ?? Struktur Endpoints API
+## ?? API Endpoints Structure
 
-Basis URL: `http://localhost:8081/api`
+Base URL: `http://localhost:8081/api`
 
 ### ?? Menu (`/api/menus`)
-| Metode | Endpoint | Keterangan |
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `POST` | `/api/menus` | Menambahkan menu baru |
-| `GET` | `/api/menus` | Mengambil daftar semua menu (Mendukung Paginasi & Filter) |
-| `GET` | `/api/menus/{id}` | Mengambil detail menu berdasarkan ID |
-| `PUT` | `/api/menus/update/{id}` | Memperbarui menu |
-| `DELETE` | `/api/menus/delete/{id}` | Menghapus menu |
+| `POST` | `/api/menus` | Add a new menu item |
+| `GET` | `/api/menus` | Retrieve all menu items (Supports Pagination & Filtering) |
+| `GET` | `/api/menus/{id}` | Retrieve menu item details by ID |
+| `PUT` | `/api/menus/update/{id}` | Update a menu item |
+| `DELETE` | `/api/menus/delete/{id}` | Delete a menu item |
 
 ### ?? Customer (`/api/customers`)
-| Metode | Endpoint | Keterangan |
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `POST` | `/api/customers` | Menambahkan customer baru |
-| `GET` | `/api/customers` | Mengambil daftar semua customer (Mendukung Paginasi & Filter) |
-| `GET` | `/api/customers/search/{id}`| Mengambil detail customer berdasarkan ID |
-| `PUT` | `/api/customers/update/{id}`| Memperbarui data customer |
-| `DELETE` | `/api/customers/delete/{id}`| Menghapus customer |
+| `POST` | `/api/customers` | Add a new customer |
+| `GET` | `/api/customers` | Retrieve all customers (Supports Pagination & Filtering) |
+| `GET` | `/api/customers/search/{id}`| Retrieve customer details by ID |
+| `PUT` | `/api/customers/update/{id}`| Update customer data |
+| `DELETE` | `/api/customers/delete/{id}`| Delete a customer |
 
 ### ?? Transaction (`/api/transactions`)
-| Metode | Endpoint | Keterangan |
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `POST` | `/api/transactions` | Membuat transaksi pembelian baru |
-| `GET` | `/api/transactions` | Mengambil daftar transaksi (Mendukung Paginasi & Filter Tanggal/Customer) |
-| `GET` | `/api/transactions/search/{id}`| Mengambil detail transaksi berdasarkan ID |
+| `POST` | `/api/transactions` | Create a new purchase transaction |
+| `GET` | `/api/transactions` | Retrieve transaction list (Supports Pagination & Date/Customer Filtering) |
+| `GET` | `/api/transactions/search/{id}`| Retrieve transaction details by ID |
 
 ---
 
-## ?? Catatan Paginasi dan Sorting
-Untuk endpoint yang mengembalikan daftar (GET All), Anda bisa mengirimkan query params standar *Spring Pageable*, contohnya:
-- `?page=0&size=5` (Mendapatkan halaman pertama dengan maksimal 5 data per halaman)
-- `?sort=name,desc` (Mengurutkan berdasarkan nama secara *descending*)
-
+## ?? Pagination and Sorting Notes
+For endpoints that return a list (GET All), you can send standard *Spring Pageable* query params, for example:
+- `?page=0&size=5` (Get the first page with a maximum of 5 items per page)
+- `?sort=name,desc` (Sort by name in *descending* order)
